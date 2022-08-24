@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:Yoga_App_V1.ViewModels" 
+             xmlns:model="clr-namespace:Yoga_App_V1.Models"
+             x:DataType="viewmodels:PlaylistDetailViewModel"
+             x:Class="Yoga_App_V1.Views.PlaylistDetailPage"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <StackLayout>
+        <Label Text="{Binding Name}" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Start" Padding="-1"/>
+        <Label Text="{Binding DifficultyRating, StringFormat='Difficulty Rating: {0}'}" FontSize="Subtitle" Padding="-1"/>
+        <Label Text="{Binding Duration, StringFormat='Total Duration: {0} mins'}" FontSize="Subtitle" Padding="-1"/>
+        <Label Text="{Binding ContentDescription}" Padding="-1"></Label>
+        <CollectionView x:Name="ExercisesListView" ItemsSource="{Binding Exercises}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                        <Frame CornerRadius="8" Margin="1" BackgroundColor="LightBlue" HasShadow="True" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <StackLayout Padding="0" x:DataType="model:Exercise">
+                                
+                                <Grid RowSpacing="0" ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="{Binding Thumbnail}" 
+                                   HeightRequest="120" 
+                                   WidthRequest="175" 
+                                   Margin="-5" 
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"
+                                   Grid.Column="1"
+                                   Grid.Row="0" 
+                                   Aspect="Fill"
+                                           
+                                />
+                                    <Label Text="{Binding ExerciseContent}" Grid.Column="1" Grid.Row="1" FontSize="Small">
+
+                                    </Label>
+                                </Grid>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+    </ScrollView>
+</ContentPage>

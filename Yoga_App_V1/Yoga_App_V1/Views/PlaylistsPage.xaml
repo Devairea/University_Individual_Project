@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yoga_App_V1.Views.PlaylistsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Yoga_App_V1.ViewModels"  
+             xmlns:model="clr-namespace:Yoga_App_V1.Models" x:DataType="local:PlaylistsViewModel"
+             x:Name="BrowsePlaylistsPage">
+    <!--
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddPlaylistCommand}" />
+    </ContentPage.ToolbarItems>
+   
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <RefreshView x:DataType="local:PlaylistsViewModel" Command="{Binding LoadPlaylistsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="PlaylistsListView" ItemsSource="{Binding Playlists}" SelectionMode="None" BackgroundColor="Gray">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="8" Margin="0" BackgroundColor="LightBlue" HeightRequest="30"  HasShadow="True" BorderColor="DarkGray">
+                        <StackLayout Padding="0" x:DataType="model:Playlist">
+                            <Grid RowSpacing="-10" ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="70*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Thumbnail}" 
+                                   HeightRequest="40" 
+                                   WidthRequest="50" 
+                                   Margin="-5" 
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"
+                                   Grid.Row="0" 
+                                   Aspect="Fill"
+                             />
+                                <Label Text="{Binding Name}" 
+                                   HorizontalTextAlignment="Start" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="Medium"
+                                   Grid.Column="1"
+                                   Grid.Row="0" 
+                                   WidthRequest="100"
+                                   VerticalOptions="FillAndExpand"
+                                       MaxLines="1"
+                                   />
+                                <Label Text= "{Binding PlaylistDescription}"
+                                       HorizontalTextAlignment="Start"
+                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                       FontSize="Body" Grid.Column="1"
+                                       Grid.Row="1" 
+                                       VerticalOptions="EndAndExpand"
+                                       MaxLines="1"
+                                       WidthRequest="100"
+                                       />
+
+                            </Grid>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:PlaylistsViewModel}}, Path=PlaylistTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

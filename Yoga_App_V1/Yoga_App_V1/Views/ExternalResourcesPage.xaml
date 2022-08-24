@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yoga_App_V1.Views.ExternalResourcesPage"
+             xmlns:local="clr-namespace:Yoga_App_V1.ViewModels"
+             x:DataType="local:ExternalResourcesViewModel"
+             Title="External Resources">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <CollectionView ItemsSource="{Binding ExternalResources}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="1" Margin="1" HasShadow="True" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                <StackLayout x:DataType="local:Resource">
+                                    <Image Source="{Binding Icon}" HeightRequest="{Binding IconHeight}" WidthRequest="{Binding IconWidth}" VerticalOptions="End"></Image>
+                                    <WebView HeightRequest="{Binding ContentHeight}" WidthRequest="{Binding ContentWidth}" IsVisible="True" VerticalOptions="Center">
+                                        <WebView.Source>
+                                            <HtmlWebViewSource Html="{Binding Content}"></HtmlWebViewSource>
+                                        </WebView.Source>
+                                    </WebView>
+                                    <Button Text="Learn More" Command="{Binding BoundCommand}" BackgroundColor="DodgerBlue" TextColor="White" HeightRequest="40" WidthRequest="140" HorizontalOptions="Center" IsVisible="{Binding ButtonVisible}" IsEnabled="{Binding ButtonVisible}"></Button>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

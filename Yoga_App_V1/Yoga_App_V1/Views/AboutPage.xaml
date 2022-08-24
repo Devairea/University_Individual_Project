@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yoga_App_V1.Views.AboutPage"
+             xmlns:vm="clr-namespace:Yoga_App_V1.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding DisplayWord}" Command="{Binding UserPageCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+            <ContentView VerticalOptions="FillAndExpand">
+                <Image Source="tempsanskara.PNG" VerticalOptions="Center" HeightRequest="50" BackgroundColor="MediumPurple"/>
+            </ContentView>
+        </StackLayout>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Image Source="physicalactivity.png" HeightRequest="300" WidthRequest="200"/>
+                <Label Text="Research has shown that physical activity is one of the best possible things that can be done for mental health." /> 
+                <Label Text ="The simple act of physical activity encourages the flow of positive mental chemicals and can create beneficial feelings of progress."/>
+                <Image Source="smalllivingroomideasgreysofa.jpg" HeightRequest="200" WidthRequest="300"/>
+                <Label Text="All that's necessary is a little time and a little bit of space and no matter what anyone can see health benefits from simple stretches and light exercise." />
+                <Label Text="Every day just 10 minutes spent focusing on long term pains or stiff joints can have massive effects on your physical wellbeing."/>
+                <Label Text="Carers don't need to feel like aches and pains from tirless work are unavoidable, together we hope we can make a difference."/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
